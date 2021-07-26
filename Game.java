@@ -6,16 +6,16 @@ public class Game {
 	public boolean endOfgame = false;
 	protected GameBoard gm;			
 	
-	Game(GameBoard gm){ this.gm = gm; }		// Получаем объект доски
+	Game(GameBoard gm){ this.gm = gm; }		// РџРѕР»СѓС‡Р°РµРј РѕР±СЉРµРєС‚ РґРѕСЃРєРё
 	
-	/* Проверка поля */
-	protected boolean CheckTable(int a) {			// а - значение крестика или нолика
-		// Проверка по горизонтали
+	/* РџСЂРѕРІРµСЂРєР° РїРѕР»СЏ */
+	protected boolean CheckTable(int a) {			// Р° - Р·РЅР°С‡РµРЅРёРµ РєСЂРµСЃС‚РёРєР° РёР»Рё РЅРѕР»РёРєР°
+		// РџСЂРѕРІРµСЂРєР° РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 		for(int i = 0; i < 3; i++) {
 			if(gm.GameTable[i][0] == a && gm.GameTable[i][1] == a && gm.GameTable[i][2] == a)
 				return true;
 		}
-		// Проверка по вертикали
+		// РџСЂРѕРІРµСЂРєР° РїРѕ РІРµСЂС‚РёРєР°Р»Рё
 		for(int i = 0; i < 3; i++) {
 			if(gm.GameTable[0][i] == a && gm.GameTable[1][i] == a && gm.GameTable[2][i] == a)
 				return true;
@@ -35,79 +35,79 @@ public class Game {
 		return true;
 	}
 
-	/* Старт игры */
+	/* РЎС‚Р°СЂС‚ РёРіСЂС‹ */
 	protected void StartGame() {
-		int turn = 1; 			// Показывает ход: крестик или нолик
-		Scanner in = new Scanner(System.in);		// Открываем Scanner 
+		int turn = 1; 			// РџРѕРєР°Р·С‹РІР°РµС‚ С…РѕРґ: РєСЂРµСЃС‚РёРє РёР»Рё РЅРѕР»РёРє
+		Scanner in = new Scanner(System.in);		// РћС‚РєСЂС‹РІР°РµРј Scanner 
 		
-		System.out.println("Вводить координаты в пределах [1;3]");
+		System.out.println("Р’РІРѕРґРёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІ РїСЂРµРґРµР»Р°С… [1;3]");
 		while(!endOfgame) {
 			System.out.println();
 			int x, y;
-			/* Ход "Крестика" */
+			/* РҐРѕРґ "РљСЂРµСЃС‚РёРєР°" */
 			if(turn == 1) {
-				System.out.println("Ход крестика: ");		// Модернизировать на проверку введенного числа
-				System.out.print("Строка: ");
+				System.out.println("РҐРѕРґ РєСЂРµСЃС‚РёРєР°: ");		// РњРѕРґРµСЂРЅРёР·РёСЂРѕРІР°С‚СЊ РЅР° РїСЂРѕРІРµСЂРєСѓ РІРІРµРґРµРЅРЅРѕРіРѕ С‡РёСЃР»Р°
+				System.out.print("РЎС‚СЂРѕРєР°: ");
 				if(!(in.hasNextInt())) {
-					System.out.println("Ввели не число, перезагружайте программу");
+					System.out.println("Р’РІРµР»Рё РЅРµ С‡РёСЃР»Рѕ, РїРµСЂРµР·Р°РіСЂСѓР¶Р°Р№С‚Рµ РїСЂРѕРіСЂР°РјРјСѓ");
 					break;
 				}
 				x = in.nextInt();
-				System.out.print("Столбец: ");
+				System.out.print("РЎС‚РѕР»Р±РµС†: ");
 				if(!(in.hasNextInt())) {
-					System.out.println("Ввели не число, перезагружайте программу");
+					System.out.println("Р’РІРµР»Рё РЅРµ С‡РёСЃР»Рѕ, РїРµСЂРµР·Р°РіСЂСѓР¶Р°Р№С‚Рµ РїСЂРѕРіСЂР°РјРјСѓ");
 					break;
 				}
 				y = in.nextInt();
-				System.out.println("");			// Сделать пробел
+				System.out.println("");			// РЎРґРµР»Р°С‚СЊ РїСЂРѕР±РµР»
 				if(gm.GameTable[x-1][y-1] != -1) {
-					System.out.println("Занято");		// Проверка на занятость клетки 
+					System.out.println("Р—Р°РЅСЏС‚Рѕ");		// РџСЂРѕРІРµСЂРєР° РЅР° Р·Р°РЅСЏС‚РѕСЃС‚СЊ РєР»РµС‚РєРё 
 					continue;
 				}
-				gm.GameTable[--x][--y] = 1;		// Заполнение цифрового поля
-				gm.board[x*2][y*2] = 'X';		// Заполнение символьного поля
-				turn--;		// Очередь переходит к "нолику"
+				gm.GameTable[--x][--y] = 1;		// Р—Р°РїРѕР»РЅРµРЅРёРµ С†РёС„СЂРѕРІРѕРіРѕ РїРѕР»СЏ
+				gm.board[x*2][y*2] = 'X';		// Р—Р°РїРѕР»РЅРµРЅРёРµ СЃРёРјРІРѕР»СЊРЅРѕРіРѕ РїРѕР»СЏ
+				turn--;		// РћС‡РµСЂРµРґСЊ РїРµСЂРµС…РѕРґРёС‚ Рє "РЅРѕР»РёРєСѓ"
 				gm.DrawBoard();
-				/* Проверка на пересечение */
+				/* РџСЂРѕРІРµСЂРєР° РЅР° РїРµСЂРµСЃРµС‡РµРЅРёРµ */
 				if(CheckTable(1)) {
-					System.out.println("\n\n\"Крестик\" победил!");
+					System.out.println("\n\n\"РљСЂРµСЃС‚РёРє\" РїРѕР±РµРґРёР»!");
 					endOfgame = true;
 				}
 				if(draw()) {
-					System.out.println("\n\nНичья");
+					System.out.println("\n\nРќРёС‡СЊСЏ");
 					break;
 				}
 			}
-			/* Ход "Нолика" */
-			else {				// Все аналогично с крестиком
-				System.out.println("Ход нолика: ");
-				System.out.print("Строка: ");
+			/* РҐРѕРґ "РќРѕР»РёРєР°" */
+			else {				// Р’СЃРµ Р°РЅР°Р»РѕРіРёС‡РЅРѕ СЃ РєСЂРµСЃС‚РёРєРѕРј
+				System.out.println("РҐРѕРґ РЅРѕР»РёРєР°: ");
+				System.out.print("РЎС‚СЂРѕРєР°: ");
 				if(!(in.hasNextInt())) {
-					System.out.println("Ввели не число, перезагружайте программу");
+					System.out.println("Р’РІРµР»Рё РЅРµ С‡РёСЃР»Рѕ, РїРµСЂРµР·Р°РіСЂСѓР¶Р°Р№С‚Рµ РїСЂРѕРіСЂР°РјРјСѓ");
 					break;
 				}
 				x = in.nextInt();
-				System.out.print("Столбец: ");
+				System.out.print("РЎС‚РѕР»Р±РµС†: ");
 				if(!(in.hasNextInt())) {
-					System.out.println("Ввели не число, перезагружайте программу");
+					System.out.println("Р’РІРµР»Рё РЅРµ С‡РёСЃР»Рѕ, РїРµСЂРµР·Р°РіСЂСѓР¶Р°Р№С‚Рµ РїСЂРѕРіСЂР°РјРјСѓ");
 					break;
 				}
 				y = in.nextInt();
 				System.out.println("");
 				if(gm.GameTable[x-1][y-1] != -1) {
-					System.out.println("Занято");
+					System.out.println("Р—Р°РЅСЏС‚Рѕ");
 					continue;
 				}
 				gm.GameTable[--x][--y] = 0;
 				gm.board[x*2][y*2] = 'O';				
-				turn++;		// Очередь переходит к "крестику"
+				turn++;		// РћС‡РµСЂРµРґСЊ РїРµСЂРµС…РѕРґРёС‚ Рє "РєСЂРµСЃС‚РёРєСѓ"
 				gm.DrawBoard();
 				if(CheckTable(0)) {
-					System.out.println("\n\n\"Нолик\" победил!");
+					System.out.println("\n\n\"РќРѕР»РёРє\" РїРѕР±РµРґРёР»!");
 					endOfgame = true;
 				}
 				if(draw()) {
-					System.out.println("\n\nНичья");
+					System.out.println("\n\nРќРёС‡СЊСЏ");
 					break;
 				}
 			}
